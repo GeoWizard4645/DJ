@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Viv | Professional DJ Services</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#22d3ee', // Cyan
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            fuchsia: '#d946ef',
+                            violet: '#8b5cf6'
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617; /* Slate 950 */
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .glass-panel:hover {
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            background: rgba(30, 41, 59, 0.6);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #22d3ee, #d946ef, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 5s linear infinite;
+        }
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+        
+        /* Audio Visualizer CSS */
+        .visualizer-bar {
+            width: 8px;
+            background: linear-gradient(to top, #22d3ee, #d946ef);
+            border-radius: 4px;
+            animation: bounce 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes bounce {
+            0% { height: 10px; opacity: 0.5; }
+            100% { height: 60px; opacity: 1; box-shadow: 0 0 15px #d946ef; }
+        }
+        .visualizer-bar:nth-child(1) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(2) { animation-delay: 0.4s; }
+        .visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
+        .visualizer-bar:nth-child(4) { animation-delay: 0.6s; }
+        .visualizer-bar:nth-child(5) { animation-delay: 0.3s; }
+        
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(217, 70, 239, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-fuchsia selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-slate-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-display font-bold text-2xl tracking-wider cursor-pointer transition-transform hover:scale-105">
+                    DJ <span class="gradient-text">VIV</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#pricing" class="hover:text-brand-fuchsia px-3 py-2 rounded-md text-sm font-medium transition-colors">Pricing</a>
+                        <a href="#faq" class="hover:text-brand-violet px-3 py-2 rounded-md text-sm font-medium transition-colors">FAQ</a>
+                        <a href="#contact" class="bg-gradient-to-r from-brand-500 to-brand-fuchsia text-white px-5 py-2 rounded-full text-sm font-bold transition-all shadow-[0_0_15px_rgba(217,70,239,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:scale-105">Book Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-56 lg:pb-40 overflow-hidden">
+        <div class="bg-mesh"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-float">
+            
+            <!-- CSS Audio Visualizer -->
+            <div class="flex justify-center items-end gap-2 h-16 mb-8">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight mb-6">
+                Bringing the Beat to <br/> <span class="gradient-text">Your Next Event</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mx-auto mb-10 font-medium">
+                High-energy Pop, Bollywood, and custom mixes. I've spent 3 years mastering the decks to give you an unforgettable night.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="#pricing" class="bg-gradient-to-r from-brand-500 via-brand-fuchsia to-brand-violet text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_25px_rgba(217,70,239,0.5)] hover:scale-110 hover:shadow-[0_0_35px_rgba(34,211,238,0.7)]">
+                    View Pricing
+                </a>
+                <a href="#contact" class="glass-panel text-white px-8 py-4 rounded-full font-bold text-lg transition-all border border-slate-600 hover:border-brand-400 hover:scale-105">
+                    Contact DJ Viv
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative border-t border-slate-800/50">
+        <div class="bg-mesh" style="transform: rotate(180deg);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-block px-3 py-1 rounded-full bg-brand-fuchsia/20 text-brand-fuchsia text-sm font-bold mb-4 border border-brand-fuchsia/30">
+                        <i class="fa-solid fa-bolt mr-2"></i> 3 Years Experience
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Behind the Decks</h2>
+                    <p class="text-slate-300 mb-4 leading-relaxed text-lg">
+                        Hey, I'm Vivaan—but you can call me <strong class="text-brand-400">DJ Viv</strong>. I'm a high schooler who has been professionally crushing the decks for 3 years. Armed with my Pioneer DDJ-FLX4, I bring massive energy and seamless transitions to every party.
+                    </p>
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        While Pop and Bollywood are my signature sounds, my setups are highly versatile. Whatever vibe you're chasing, I can mix it.
+                    </p>
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-brand-fuchsia hover:border-l-brand-400 transition-colors">
+                        <h3 class="font-bold text-xl mb-2 flex items-center gap-2 text-white">
+                            <i class="fa-solid fa-saxophone text-brand-fuchsia"></i> Deep Musical Roots
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            My ear for music isn't just from DJing. I am a dedicated jazz musician playing the baritone saxophone, and I've even competed on the national scale at the National Jazz Festival (NJF) in Philly. This deep background in music theory means my beatmatching, phrasing, and live mashups hit different.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-panel p-6 rounded-2xl text-center flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                        <div class="w-16 h-16 rounded-full bg-brand-400/20 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-music text-3xl text-brand-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Pop & Bollywood</h4>
+                        <p class="text-xs text-slate-400 mt-2">Signature genres</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl text-center flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(217,70,239,0.2)]">
+                        <div class="w-16 h-16 rounded-full bg-brand-fuchsia/20 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-users text-3xl text-brand-fuchsia"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Mastering the Vibe</h4>
+                        <p class="text-xs text-slate-400 mt-2">Expert crowd reading</p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-2xl text-center flex flex-col items-center justify-center col-span-2 transform transition duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)] bg-gradient-to-br from-slate-900/80 to-brand-violet/10">
+                        <div class="w-16 h-16 rounded-full bg-brand-violet/20 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-compact-disc text-3xl text-brand-violet animate-spin-slow"></i>
+                        </div>
+                        <h4 class="font-bold text-xl">Versatile Selection</h4>
+                        <p class="text-sm text-slate-300 mt-2">Tell me what you want to hear, and I'll build the perfect, custom-tailored set for your crowd.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-fuchsia to-transparent opacity-50"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Transparent <span class="gradient-text">Pricing</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                    Select your event duration and crowd size. 
+                    <br><span class="text-brand-400 font-medium text-sm"><i class="fa-solid fa-bolt"></i> All quotes include prep time & performance!</span>
+                </p>
+            </div>
+
+            <!-- Interactive Calculator -->
+            <div class="glass-panel rounded-3xl p-6 md:p-10 shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-700/50 backdrop-blur-2xl relative">
+                
+                <!-- Glowing corner accent -->
+                <div class="absolute -top-px -left-px w-20 h-20 bg-gradient-to-br from-brand-400 to-transparent opacity-50 rounded-tl-3xl"></div>
+                <div class="absolute -bottom-px -right-px w-20 h-20 bg-gradient-to-tl from-brand-fuchsia to-transparent opacity-50 rounded-br-3xl"></div>
+
+                <!-- Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 relative z-10">
+                    <!-- Duration -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-3 uppercase tracking-widest">Event Duration</label>
+                        <div class="flex gap-2 p-1.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                            <button onclick="setHours('2')" id="btn-hrs-2" class="flex-1 py-3 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">2 Hours</button>
+                            <button onclick="setHours('4')" id="btn-hrs-4" class="flex-1 py-3 rounded-lg text-sm font-bold transition-all bg-gradient-to-r from-brand-500 to-brand-400 text-slate-900 shadow-[0_0_15px_rgba(34,211,238,0.5)]">4 Hours</button>
+                            <button onclick="setHours('6')" id="btn-hrs-6" class="flex-1 py-3 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">6+ Hours</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Crowd Size -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-3 uppercase tracking-widest">Crowd Size</label>
+                        <div class="flex gap-2 p-1.5 bg-slate-900/80 rounded-xl border border-slate-800 flex-wrap sm:flex-nowrap">
+                            <button onclick="setPeople('small')" id="btn-ppl-small" class="flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50">&lt; 30 Ppl</button>
+                            <button onclick="setPeople('mid')" id="btn-ppl-mid" class="flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-brand-fuchsia to-brand-violet text-white shadow-[0_0_15px_rgba(217,70,239,0.5)] transform scale-105">30-125 Ppl</button>
+                            <button onclick="setPeople('large')" id="btn-ppl-large" class="flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50">125+ Ppl</button>
+                        </div>
+                    </div>
+
+                    <!-- Equipment Toggle -->
+                    <div class="col-span-1 md:col-span-2 mt-2">
+                        <div class="flex items-center justify-between p-4 bg-slate-900/80 rounded-xl border border-slate-800 transition-colors" id="toggle-container">
+                            <div>
+                                <span class="block text-sm font-bold text-slate-300">Include Equipment Rental</span>
+                                <span class="block text-xs text-slate-500 mt-1">If unchecked, you must provide the speakers, controller, and cables.</span>
+                            </div>
+                            <button id="toggle-equip" onclick="toggleEquipment()" class="relative inline-flex h-6 w-11 items-center rounded-full bg-brand-fuchsia transition-colors focus:outline-none focus:ring-2 focus:ring-brand-fuchsia focus:ring-offset-2 focus:ring-offset-slate-900">
+                                <span id="toggle-knob" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown Display -->
+                <div class="bg-slate-950/80 rounded-2xl p-6 md:p-8 border border-slate-700/80 relative z-10 shadow-inner transition-all duration-300" id="breakdown-box">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-800 pb-6 mb-6 gap-4">
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-display font-bold text-white" id="display-title">4 Hours • 30 - 125 People</h3>
+                            <p class="text-sm text-brand-400 mt-1 font-medium">Estimated quote based on industry standards</p>
+                        </div>
+                        <div class="text-left md:text-right w-full md:w-auto bg-slate-900/50 p-4 rounded-xl border border-slate-800 transition-all duration-300" id="total-box">
+                            <div class="text-xs text-slate-400 uppercase tracking-wider mb-1 font-bold">Total Quote</div>
+                            <div class="text-3xl md:text-4xl font-extrabold gradient-text" id="display-total">$500 – $850</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center group">
+                            <div class="flex items-center gap-4 text-slate-300">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800/80 flex items-center justify-center text-brand-400 border border-brand-400/20 group-hover:bg-brand-400/20 transition-colors"><i class="fa-solid fa-headphones"></i></div>
+                                <div>
+                                    <div class="font-bold text-white text-lg">Live Mixing</div>
+                                    <div class="text-xs text-slate-400">Live performance & crowd interaction</div>
+                                </div>
+                            </div>
+                            <div class="font-bold text-lg text-slate-200" id="display-perf">$250 – $350</div>
+                        </div>
+
+                        <div class="flex justify-between items-center group">
+                            <div class="flex items-center gap-4 text-slate-300">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800/80 flex items-center justify-center text-brand-violet border border-brand-violet/20 group-hover:bg-brand-violet/20 transition-colors"><i class="fa-solid fa-clock"></i></div>
+                                <div>
+                                    <div class="font-bold text-white text-lg">Event Prep</div>
+                                    <div class="text-xs text-slate-400" id="display-prep-desc">10-12 hours of music curation & prep</div>
+                                </div>
+                            </div>
+                            <div class="font-bold text-lg text-slate-200" id="display-log">$125</div>
+                        </div>
+
+                        <div class="flex justify-between items-center group transition-all duration-300" id="equip-row">
+                            <div class="flex items-center gap-4 text-slate-300">
+                                <div class="w-10 h-10 rounded-xl bg-slate-800/80 flex items-center justify-center text-brand-fuchsia border border-brand-fuchsia/20 group-hover:bg-brand-fuchsia/20 transition-colors" id="equip-icon"><i class="fa-solid fa-speaker-deck"></i></div>
+                                <div>
+                                    <div class="font-bold text-white text-lg" id="equip-title">Equipment Rental <span class="text-brand-fuchsia text-sm font-normal ml-2 italic">(Optional)</span></div>
+                                    <div class="text-xs text-slate-400" id="equip-desc">Speakers, cables, mic & DJ controller. <span class="text-brand-fuchsia font-medium">*Contact for more info</span></div>
+                                </div>
+                            </div>
+                            <div class="font-bold text-lg text-slate-200" id="display-equip">$125 – $375</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <p class="text-sm text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-plus text-brand-400"></i> Extra hours: <span class="font-bold text-white bg-slate-800 px-2 py-1 rounded">$75 – $100/hr</span>
+                        </p>
+                        
+                        <!-- Inline Contact Button -->
+                        <a href="#contact" class="w-full md:w-auto text-center bg-gradient-to-r from-brand-fuchsia to-brand-violet hover:from-brand-500 hover:to-brand-fuchsia text-white px-8 py-3 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(217,70,239,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] transform hover:-translate-y-1">
+                            Contact Me to Book
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Disclaimers -->
+                <div class="mt-6 text-xs text-slate-400 leading-relaxed text-center bg-slate-900/50 p-4 rounded-xl border border-slate-800/50">
+                    <p><i class="fa-solid fa-circle-info text-brand-400 mr-1"></i> <strong>Disclaimer:</strong> Prices shown are standard estimates based on industry norms. Actual quotes may change based on specific context, venue requirements, or location. I am <strong>completely open to negotiations</strong> and price adjustments to fit your event's exact needs!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 relative bg-slate-900/40 border-t border-slate-800/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-bold mb-4">Frequently Asked <span class="text-brand-fuchsia">Questions</span></h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ 1 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl hover:border-brand-400/50 transition-colors">
+                    <h3 class="font-bold text-xl mb-3 flex items-center gap-3">
+                        <div class="bg-brand-400/20 p-2 rounded-lg text-brand-400"><i class="fa-solid fa-volume-high"></i></div>
+                        Do I need to rent speakers, or do you bring them?
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed pl-12">
+                        You don't need to worry about the tech! My standard quotes include the option for speaker and equipment rentals tailored to the size of your crowd. If you choose that option, I bring the FLX4 controller, powered speakers, stands, cables, and a mic.
+                    </p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl border-brand-fuchsia/40 shadow-[0_0_20px_rgba(217,70,239,0.1)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-fuchsia/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <h3 class="font-bold text-xl mb-3 flex items-center gap-3 relative z-10">
+                        <div class="bg-brand-fuchsia/20 p-2 rounded-lg text-brand-fuchsia"><i class="fa-solid fa-handshake-angle"></i></div>
+                        Prices seem a bit high, but I want a fun event. Can you help?
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed pl-12 relative z-10">
+                        Absolutely! If you're looking for a low-commitment, fun event that's a massive step up from just playing a Spotify playlist on a Bluetooth speaker, <strong>contact me</strong>. As a high schooler doing this out of passion, I am open to negotiations and we can easily work out a cheaper pricing structure depending on your exact needs and how much heavy equipment is required. Let's make it work for your budget!
+                    </p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl hover:border-brand-violet/50 transition-colors">
+                    <h3 class="font-bold text-xl mb-3 flex items-center gap-3">
+                        <div class="bg-brand-violet/20 p-2 rounded-lg text-brand-violet"><i class="fa-solid fa-list-ul"></i></div>
+                        Do you take song requests?
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed pl-12">
+                        Yes! I love working with clients to build a baseline playlist of must-hears and do-not-plays. During the event, I'm happy to take live requests from the crowd as long as they fit the overall vibe you want for the night.
+                    </p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="glass-panel p-6 md:p-8 rounded-2xl hover:border-brand-400/50 transition-colors">
+                    <h3 class="font-bold text-xl mb-3 flex items-center gap-3">
+                        <div class="bg-brand-400/20 p-2 rounded-lg text-brand-400"><i class="fa-solid fa-record-vinyl"></i></div>
+                        What genres do you play?
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed pl-12">
+                        Pop and Bollywood are my absolute specialties. However, as an experienced musician, I read the room well and I am completely open to DJing whatever genres—Hip-Hop, EDM, R&B, Throwbacks—make your party unforgettable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-brand-900/20"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <div class="inline-block mb-6">
+                <i class="fa-solid fa-bolt text-5xl text-brand-fuchsia animate-pulse-fast drop-shadow-[0_0_15px_rgba(217,70,239,0.8)]"></i>
+            </div>
+            
+            <h2 class="text-5xl font-display font-extrabold mb-6">Let's Make It <span class="gradient-text">Happen</span></h2>
+            <p class="text-slate-300 mb-12 max-w-xl mx-auto text-lg">
+                Reach out today to secure your date, discuss your music preferences, and get a finalized, customized quote from DJ Viv.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+                <a href="mailto:Vivaan.shahani@gmail.com" class="glass-panel group flex items-center gap-5 px-8 py-5 rounded-2xl hover:bg-slate-800/80 transition-all w-full md:w-auto hover:scale-105 hover:border-brand-400">
+                    <div class="bg-brand-400/20 p-4 rounded-xl text-brand-400 group-hover:bg-brand-400 group-hover:text-slate-900 transition-colors">
+                        <i class="fa-solid fa-envelope text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-slate-400 uppercase tracking-wider font-bold">Email Me</div>
+                        <div class="font-bold text-lg text-white">Vivaan.shahani@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="tel:914-520-7210" class="glass-panel group flex items-center gap-5 px-8 py-5 rounded-2xl hover:bg-slate-800/80 transition-all w-full md:w-auto hover:scale-105 hover:border-brand-fuchsia">
+                    <div class="bg-brand-fuchsia/20 p-4 rounded-xl text-brand-fuchsia group-hover:bg-brand-fuchsia group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-phone text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-slate-400 uppercase tracking-wider font-bold">Call or Text</div>
+                        <div class="font-bold text-lg text-white">914-520-7210</div>
+                    </div>
+                </a>
+            </div>
+
+            <a href="mailto:Vivaan.shahani@gmail.com?subject=DJ Viv Booking Inquiry" class="inline-block bg-gradient-to-r from-brand-500 via-brand-fuchsia to-brand-violet text-white px-12 py-5 rounded-full font-extrabold text-xl transition-all shadow-[0_0_30px_rgba(217,70,239,0.5)] hover:scale-110 hover:shadow-[0_0_50px_rgba(34,211,238,0.7)]">
+                Message Me Now
+            </a>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-800/80 py-10 bg-slate-950 text-center text-slate-500 text-sm">
+        <div class="flex justify-center items-center gap-4 mb-4">
+            <span class="text-brand-400 font-display font-bold text-lg">DJ VIV</span>
+        </div>
+        <p>&copy; 2026 DJ Viv (Vivaan Shahani). All rights reserved.</p>
+    </footer>
+
+    <!-- Interactive Pricing Logic -->
+    <script>
+        // Updated Data Structure: Base Performance is Constant per Duration. Equipment and Prep scales.
+        // "small" = < 30 People (No Equip needed)
+        // "mid" = 30-125 People (Standard Rental)
+        // "large" = 125+ People (Heavy Rental)
+        const pricingData = {
+            '2': {
+                'small': { title: "2 Hours • < 30 People", perfMin: 150, perfMax: 200, prepDesc: "5-6 hours of music curation & prep", prep: 50, equipMin: 0, equipMax: 0 },
+                'mid': { title: "2 Hours • 30 - 125 People", perfMin: 150, perfMax: 200, prepDesc: "5-6 hours of music curation & prep", prep: 75, equipMin: 125, equipMax: 250 },
+                'large': { title: "2 Hours • 125+ People", perfMin: 150, perfMax: 200, prepDesc: "5-6 hours of music curation & prep", prep: 100, equipMin: 200, equipMax: 350 }
+            },
+            '4': {
+                'small': { title: "4 Hours • < 30 People", perfMin: 250, perfMax: 350, prepDesc: "10-12 hours of music curation & prep", prep: 100, equipMin: 0, equipMax: 0 },
+                'mid': { title: "4 Hours • 30 - 125 People", perfMin: 250, perfMax: 350, prepDesc: "10-12 hours of music curation & prep", prep: 125, equipMin: 125, equipMax: 375 },
+                'large': { title: "4 Hours • 125+ People", perfMin: 250, perfMax: 350, prepDesc: "10-12 hours of music curation & prep", prep: 150, equipMin: 250, equipMax: 500 } 
+            },
+            '6': {
+                'small': { title: "6+ Hours • < 30 People", perfMin: 350, perfMax: 500, prepDesc: "15-18 hours of music curation & prep", prep: 150, equipMin: 0, equipMax: 0 },
+                'mid': { title: "6+ Hours • 30 - 125 People", perfMin: 350, perfMax: 500, prepDesc: "15-18 hours of music curation & prep", prep: 175, equipMin: 175, equipMax: 400 },
+                'large': { title: "6+ Hours • 125+ People", perfMin: 350, perfMax: 500, prepDesc: "15-18 hours of music curation & prep", prep: 200, equipMin: 300, equipMax: 600 }
+            }
+        };
+
+        // Current State
+        let currentHours = '4';
+        let currentPeople = 'mid';
+        let includeEquipment = true;
+
+        function toggleEquipment() {
+            includeEquipment = !includeEquipment;
+            const toggleBg = document.getElementById('toggle-equip');
+            const toggleKnob = document.getElementById('toggle-knob');
+            
+            if(includeEquipment) {
+                toggleBg.classList.replace('bg-slate-700', 'bg-brand-fuchsia');
+                toggleKnob.classList.replace('translate-x-1', 'translate-x-6');
+            } else {
+                toggleBg.classList.replace('bg-brand-fuchsia', 'bg-slate-700');
+                toggleKnob.classList.replace('translate-x-6', 'translate-x-1');
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            // Update button styles for Hours
+            ['2', '4', '6'].forEach(h => {
+                const btn = document.getElementById(`btn-hrs-${h}`);
+                if(h === currentHours) {
+                    btn.className = "flex-1 py-3 rounded-lg text-sm font-bold transition-all bg-gradient-to-r from-brand-500 to-brand-400 text-slate-900 shadow-[0_0_15px_rgba(34,211,238,0.5)] transform scale-105";
+                } else {
+                    btn.className = "flex-1 py-3 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50";
+                }
+            });
+
+            // Update button styles for People
+            ['small', 'mid', 'large'].forEach(p => {
+                const btn = document.getElementById(`btn-ppl-${p}`);
+                if(p === currentPeople) {
+                    btn.className = "flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-brand-fuchsia to-brand-violet text-white shadow-[0_0_15px_rgba(217,70,239,0.5)] transform scale-105";
+                } else {
+                    btn.className = "flex-1 py-3 px-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700/50";
+                }
+            });
+
+            // Calculate Data based on toggle state
+            const data = pricingData[currentHours][currentPeople];
+            
+            const actualEquipMin = includeEquipment ? data.equipMin : 0;
+            const actualEquipMax = includeEquipment ? data.equipMax : 0;
+            
+            const totalMin = data.perfMin + data.prep + actualEquipMin;
+            const totalMax = data.perfMax + data.prep + actualEquipMax;
+
+            // Equipment text generation
+            let equipStr = "";
+            if (data.equipMin === 0 && data.equipMax === 0) {
+                equipStr = "$0 (Included)";
+            } else if (!includeEquipment) {
+                equipStr = "$0 (Opted Out)";
+            } else {
+                equipStr = `$${data.equipMin} – $${data.equipMax}`;
+            }
+
+            // Visual dimming for opted-out equipment
+            const equipRow = document.getElementById('equip-row');
+            const equipIcon = document.getElementById('equip-icon');
+            const equipTitle = document.getElementById('equip-title');
+            const equipDesc = document.getElementById('equip-desc');
+            const displayEquip = document.getElementById('display-equip');
+
+            if (!includeEquipment && (data.equipMin > 0 || data.equipMax > 0)) {
+                equipRow.classList.add('opacity-40');
+                displayEquip.classList.replace('text-slate-200', 'text-slate-500');
+            } else {
+                equipRow.classList.remove('opacity-40');
+                displayEquip.classList.replace('text-slate-500', 'text-slate-200');
+            }
+            
+            // Add a slight fade effect to numbers
+            const displayElements = ['display-title', 'display-total', 'display-perf', 'display-equip', 'display-log', 'display-prep-desc'];
+            displayElements.forEach(id => {
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(5px)';
+                
+                setTimeout(() => {
+                    if(id === 'display-title') el.innerText = data.title;
+                    if(id === 'display-total') el.innerText = `$${totalMin} – $${totalMax}`;
+                    if(id === 'display-perf') el.innerText = `$${data.perfMin} – $${data.perfMax}`;
+                    if(id === 'display-log') el.innerText = `$${data.prep}`;
+                    if(id === 'display-prep-desc') el.innerText = data.prepDesc;
+                    if(id === 'display-equip') el.innerText = equipStr;
+                    
+                    el.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 150);
+            });
+        }
+
+        function setHours(h) {
+            currentHours = h;
+            updateUI();
+        }
+
+        function setPeople(p) {
+            currentPeople = p;
+            updateUI();
+        }
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+</html>
